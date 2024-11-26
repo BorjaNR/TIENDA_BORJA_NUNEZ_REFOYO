@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://getbootstrap.esdocu.com/docs/5.3/examples/checkout/ -->
+<html lang="es" data-bs-theme="light">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="./pago_files/color-modes.js.descarga"></script>
+<style type="text/css" id="operaUserStyle"></style>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.118.2">
+<title>pago</title>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body class="bg-body-tertiary">
+	<nav th:replace="/fragments/header.html :: header"></nav>
+	<div class="container">
+		<main>
+			<div class="row g-5">
+				<div class="col-md-5 col-lg-4 order-md-last">
+					<h4 class="d-flex justify-content-between align-items-center mb-3">
+						<span class="text-primary">Tu carrito</span> <span
+							class="badge bg-primary rounded-pill"
+							th:text="${session.totalCarritos}">total</span>
+					</h4>
+					<ul class="list-group mb-3">
+						<li class="list-group-item d-flex justify-content-between lh-sm" th:each="lineaCarrito : ${session.carrito}">
+							<div>
+								<h6 class="my-0" th:text="${lineaCarrito?.nombre}">Nombre Producto</h6>
+								<h6 class="my-0" th:text="${lineaCarrito?.cantidad}">Nombre Producto</h6>
+							</div> <span class="text-body-secondary" th:text="${lineaCarrito?.precio + '€'}">Precio Producto</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between"><span>Total
+								(EUR)</span> <strong th:text="${session.totalPrecioCarrito + '€'}">totalPrecioCarro</strong></li>
+					</ul>
+
+					<!--<form class="card p-2">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Promo code">
+							<button type="submit" class="btn btn-secondary">Canjear</button>
+						</div>
+					</form>-->
+				</div>
+				<div class="col-md-7 col-lg-8">
+					<h4 class="mb-3">Dirección de facturación</h4>
+					<form class="needs-validation" novalidate="" th:action="@{/finalizarCompra}" method="POST" style="margin-bottom:100px;">
+						<div class="row g-3">
+							<div class="col-md-5">
+								<label for="direccion" class="form-label">Direccion</label> 
+								<select class="form-select" id="direccion" name="direccion" required="" th:each="direccion : ${direcciones}">
+									<option selected th:value="${direccion.id}" th:text="${direccion.toString()}">Direccion</option>
+								</select>
+							</div>
+
+							<hr class="my-4">
+							<hr class="my-4">
+							<h4 class="mb-3">Pago</h4>
+
+							<div class="my-3">
+								<div class="form-check">
+									<input id="credit" name="metodopago" value="credito" type="radio"
+										class="form-check-input" checked="" required=""> 
+									<label class="form-check-label" for="credit">Tarjeta de crédito</label>
+								</div>
+								<div class="form-check">
+									<input id="debit" name="metodopago" value="debito" type="radio"
+										class="form-check-input" required=""> 
+									<label class="form-check-label" for="debit">Tarjeta de débito</label>
+								</div>
+								<div class="form-check">
+									<input id="paypal" name="metodopago" value="paypal" type="radio"
+										class="form-check-input" required=""> 
+										<label class="form-check-label" for="paypal">PayPal</label>
+								</div>
+							</div>
+
+							<div class="row gy-3">
+								<div class="col-md-6">
+									<label for="cc-name" class="form-label">Nombre en la
+										tarjeta</label> <input type="text" class="form-control" id="cc-name"
+										placeholder="" required=""> <small
+										class="text-body-secondary">Nombre completo como se
+										muestra en la tarjeta</small>
+									<div class="invalid-feedback">Se requiere el nombre en la
+										tarjeta</div>
+								</div>
+
+								<div class="col-md-6">
+									<label for="cc-number" class="form-label">Número de
+										tarjeta de crédito</label> <input type="text" class="form-control"
+										id="cc-number" placeholder="" required="">
+									<div class="invalid-feedback">Se requiere número de
+										tarjeta de crédito</div>
+								</div>
+
+								<div class="col-md-3">
+									<label for="cc-expiration" class="form-label">Caducidad</label>
+									<input type="text" class="form-control" id="cc-expiration"
+										placeholder="" required="">
+									<div class="invalid-feedback">Se requiere fecha de
+										vencimiento</div>
+								</div>
+
+								<div class="col-md-3">
+									<label for="cc-cvv" class="form-label">CVV</label> <input
+										type="text" class="form-control" id="cc-cvv" placeholder=""
+										required="">
+									<div class="invalid-feedback">Se requiere código de
+										seguridad</div>
+								</div>
+							</div>
+
+							<hr class="my-4">
+
+							<button class="w-100 btn btn-primary btn-lg" type="submit">Finalizar Compra</button>
+					</form>
+				</div>
+			</div>
+		</main>
+
+	</div>
+	<footer th:replace="/fragments/footer.html :: footer"></footer>
+	<!-- Core theme JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
+</html>

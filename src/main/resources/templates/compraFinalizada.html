@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Exitosa</title>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="alert alert-success text-center" role="alert">
+            <h4 class="alert-heading">¡Enhorabuena!</h4>
+            <p>Tu compra ha sido finalizada con éxito.</p>
+            <hr>
+            <p class="mb-0">Gracias por confiar en nosotros. Esperamos que disfrutes de tu compra.</p>
+        </div>
+        <div class="text-center mt-4">
+            <a th:href="@{/}" class="btn btn-primary">Volver al inicio</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
