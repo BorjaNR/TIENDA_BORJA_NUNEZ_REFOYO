@@ -1,66 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>TIENDA BORJA</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link th:href="@{/css/styles.css}" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    </head>
-    <body>
-     	<nav th:replace="/fragments/header.html :: header"></nav>
-        <!-- Page Content-->
-        <div class="container px-4 px-lg-5">
-            <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" th:src="@{./images/index.png}" alt="..." /></div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light">El Coronel</h1>
-                    <p>Nos complace darte la bienvenida a nuestra tienda en línea, donde encontrarás una exclusiva selección de alcoholes y puros de gran calidad. En El Coronel, nos apasiona ofrecerte solo lo mejor, con productos cuidadosamente seleccionados que garantizan una experiencia única para los paladares más exigentes. Desde finos whiskies, elegantes vinos y rones premium, hasta los más selectos puros, cada artículo en nuestra tienda refleja nuestro compromiso con la excelencia.
-
-						Navega a tu gusto por nuestro catálogo y descubre una gama de productos pensados para los verdaderos conocedores. Ya sea que busques el regalo perfecto o un detalle para tu colección personal, en El Coronel siempre encontrarás algo que te sorprenderá.
-
-						¡Gracias por elegirnos!
-				</p>
-                </div>
-            </div>
-            <form th:action="@{/verCatalogoCategorias}" method="POST">
-	            <select class="form-select form-select-sm w-25" style="margin-bottom:25px" aria-label="Default select example" name="categoria" onchange="this.form.submit()">
-	              <option selected disabled>Categorias</option>
-				  <option th:value="0">Todas</option>
-				  <option th:each="categoria : ${categorias}"  th:value="${categoria.id}" th:text="${categoria.nombre}">NombreCategoria</option>
-				</select>
-			</form>
-            <!-- Content Row-->
-            <div class="row gx-4 gx-lg-5" style="margin-bottom:100px;">
-          	<!-- Cartas -->
-                <div class="col-md-4 mb-5" th:each="producto : ${catalogo}">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title" th:text="${producto?.nombre}">NombreProducto</h3>
-                            <img th:src="${producto?.ruta}" class="img-fluid" style="height: 200px;">
-                        </div>
-                        <div class="card-footer">
-                        	<p th:text="${producto?.precio + '€'}">PrecioProducto</p>
-                        	<p th:text="${'Stock: ' + producto?.stock}">StockProducto</p>
-                        	<form th:action="@{/verProducto}" method="POST">
-                        		<input type="hidden" name="id" th:value="${producto.id}">
-                        		<button class="btn btn-primary btn-sm" type="submit">Detalles</button>
-                        	</form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <footer th:replace="/fragments/footer.html :: footer"></footer>
-        <!-- Core theme JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>TIENDA BORJA</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<nav th:replace="/fragments/header.html :: header"></nav>
+	<!-- Page Content-->
+	<div class="container px-4 px-lg-5">
+		<!-- Heading Row-->
+		<div class="row gx-4 gx-lg-5 align-items-center my-5">
+			<div class="col-lg-7">
+				<img class="img-fluid rounded mb-4 mb-lg-0"
+					th:src="@{./images/index.png}" alt="..." />
+			</div>
+			<div class="col-lg-5">
+				<h1 class="font-weight-light">El Coronel</h1>
+				<p>Nos complace darte la bienvenida a nuestra tienda en línea,
+					donde encontrarás una exclusiva selección de alcoholes y puros de
+					gran calidad. En El Coronel, nos apasiona ofrecerte solo lo mejor,
+					con productos cuidadosamente seleccionados que garantizan una
+					experiencia única para los paladares más exigentes. Desde finos
+					whiskies, elegantes vinos y rones premium, hasta los más selectos
+					puros, cada artículo en nuestra tienda refleja nuestro compromiso
+					con la excelencia. Navega a tu gusto por nuestro catálogo y
+					descubre una gama de productos pensados para los verdaderos
+					conocedores. Ya sea que busques el regalo perfecto o un detalle
+					para tu colección personal, en El Coronel siempre encontrarás algo
+					que te sorprenderá. ¡Gracias por elegirnos!</p>
+			</div>
+		</div>
+		<form th:action="@{/verCatalogoCategorias}" method="POST">
+			<select class="form-select form-select-sm w-25"
+				style="margin-bottom: 25px" aria-label="Default select example"
+				name="categoria" onchange="this.form.submit()">
+				<option selected disabled>Categorias</option>
+				<option th:value="0">Todas</option>
+				<option th:each="categoria : ${categorias}"
+					th:value="${categoria.id}" th:text="${categoria.nombre}">NombreCategoria</option>
+			</select>
+		</form>
+		<!-- Content Row-->
+		<div class="row gx-4 gx-lg-5" style="margin-bottom: 100px;">
+			<!-- Cartas -->
+			<div class="col-md-4 mb-5" th:each="producto : ${catalogo}">
+				<div class="card h-100">
+					<!-- Product image-->
+					<div class="d-flex justify-content-center">
+					    <img class="card-img-top" th:src="${producto?.ruta}" alt="..." style="height:240px; width:200px"/>
+					</div>
+					<!-- Product details-->
+					<div class="card-body p-4">
+						<div class="text-center">
+							<!-- Product name-->
+							<h5 class="fw-bolder" th:text="${producto?.nombre}">NombreProducto</h5>
+							<!-- Product price-->
+							<p th:text="${producto?.precio + '€'}">PrecioProducto</p>
+						</div>
+					</div>
+					<!-- Product actions-->
+					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+						<form th:action="@{/verProducto}" method="POST">
+							<input type="hidden" name="id" th:value="${producto.id}">
+							<div class="text-center">
+								<button class="btn btn-outline-dark mt-auto" type="submit">Detalles</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/fragments/footer.html :: footer"></footer>
+	<!-- Core theme JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
 </html>
