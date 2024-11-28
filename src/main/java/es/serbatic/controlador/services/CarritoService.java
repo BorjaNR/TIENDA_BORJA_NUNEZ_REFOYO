@@ -61,7 +61,7 @@ public class CarritoService {
 		cd.deleteById(id);
 	}
 	
-	public boolean comprobarStrock(int productoId, int cantidad) {
+	public boolean comprobarStock(int productoId, int cantidad) {
 		boolean esValido = false;
 		ProductoVO p = new ProductoVO();
 		p = pd.findById(productoId).orElse(null);

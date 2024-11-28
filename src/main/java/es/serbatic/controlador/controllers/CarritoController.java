@@ -56,7 +56,7 @@ public class CarritoController {
 
 
 		if (id != null) {
-			if(cs.comprobarStrock(c.getProducto_id(), cantidadUsuario)) {
+			if(cs.comprobarStock(c.getProducto_id(), cantidadUsuario)) {
 				c.setCantidad(cantidadUsuario);
 			    c.setUsuario_id(id);
 				if(cs.existeCarrito(c)) {
