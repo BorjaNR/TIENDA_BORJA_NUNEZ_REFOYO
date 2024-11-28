@@ -51,8 +51,9 @@
 						<div class="row g-3">
 							<div class="col-md-5">
 								<label for="direccion" class="form-label">Direccion</label> 
-								<select class="form-select" id="direccion" name="direccion" required="" th:each="direccion : ${direcciones}">
-									<option selected th:value="${direccion.id}" th:text="${direccion.toString()}">Direccion</option>
+								<select class="form-select" id="direccion" name="direccion" required="">
+									<option th:each="direccion : ${direcciones}" th:value="${direccion.id}" 
+									th:text="${direccion.toString()}">Direccion</option>
 								</select>
 							</div>
 
