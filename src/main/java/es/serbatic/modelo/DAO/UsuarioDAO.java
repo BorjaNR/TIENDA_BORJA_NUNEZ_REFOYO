@@ -12,7 +12,7 @@ import es.serbatic.modelo.VO.UsuarioVO;
 public interface UsuarioDAO extends JpaRepository<UsuarioVO, Integer>{
 	//Devuelve un usuario si tiene ese email y esa clave
 	@Query("SELECT u FROM UsuarioVO u WHERE u.email = :email")
-    UsuarioVO findByEmailAndClave(@Param("email") String email);
+    UsuarioVO findByEmail(@Param("email") String email);
 	
 	//Devuelve un boolean dependiendo de si existe ya un usuario con ese email
 	@Query("SELECT COUNT(u) > 0 FROM UsuarioVO u WHERE u.email = :email")

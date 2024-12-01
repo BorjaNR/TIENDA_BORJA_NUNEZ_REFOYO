@@ -55,19 +55,11 @@ public class PedidoService {
 		return p;
 	}
 	
-	public PedidoVO obtenerPedidos(int idUsuario, String numFactura) {
-		PedidoVO p = new PedidoVO();
-		
-		p = pd.findByUsuarioIdAndNumFactura(idUsuario, numFactura);
-		
-		return p;
-	}
-	
 	public List<PedidoVO> obtenerListaPedidos(int id){
 		return pd.findByUsuarioId(id);
 	}
 	
-	public boolean cancelarDetalle(int id) {
+	public boolean cancelarPedido(int id) {
 		PedidoVO p = pd.findById(id).orElse(null);
 		
 		if (!p.getEstado().equals("Enviado") && !p.getEstado().equals("Pendiente de cancelacion") && !p.getEstado().equals("Cancelado")) {

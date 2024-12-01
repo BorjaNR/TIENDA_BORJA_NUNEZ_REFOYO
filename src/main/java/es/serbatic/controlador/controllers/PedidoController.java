@@ -46,11 +46,11 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/cancelarPedido")
-	public String cancelarDetalle(@RequestParam("pedidoId") String idPedido, Model model){
+	public String cancelarPedido(@RequestParam("pedidoId") String idPedido, Model model){
 		String pagina = "redirect:/verMisPedidos";
 		int id = Integer.parseInt(idPedido);
 		
-		if(!ps.cancelarDetalle(id)) {
+		if(!ps.cancelarPedido(id)) {
 			model.addAttribute("error", "No se puede cancelar");
 			pagina = "forward:/verDetalle";
 		}

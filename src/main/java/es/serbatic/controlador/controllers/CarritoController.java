@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.serbatic.controlador.services.CarritoService;
+import es.serbatic.controlador.services.ProductoService;
 import es.serbatic.controlador.services.UsuarioService;
 import es.serbatic.modelo.VO.CarritoVO;
 import jakarta.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ public class CarritoController {
 	@Autowired
 	private UsuarioService us;
 	@Autowired
-	private CarritoService cas;
+	private ProductoService ps;
 
 	@GetMapping("/verCarrito")
 	public String verCarrito(Model model, HttpSession sesion) {
@@ -39,7 +40,7 @@ public class CarritoController {
 			model.addAttribute("total", cs.totalPrecioCarritos(listado));
 			sesion.setAttribute("totalPrecioCarrito", cs.totalPrecioCarritos(listado));
 			if(sesion.getAttribute("totalCarritos") != null) {
-				int totalCarrito = cas.totalNumeroDeCarritos(id);
+				int totalCarrito = cs.totalNumeroDeCarritos(id);
 				sesion.setAttribute("totalCarritos", totalCarrito);
 			}
 		}
@@ -56,7 +57,7 @@ public class CarritoController {
 
 
 		if (id != null) {
-			if(cs.comprobarStock(c.getProducto_id(), cantidadUsuario)) {
+			if(ps.comprobarStock(c.getProducto_id(), cantidadUsuario)) {
 				c.setCantidad(cantidadUsuario);
 			    c.setUsuario_id(id);
 				if(cs.existeCarrito(c)) {

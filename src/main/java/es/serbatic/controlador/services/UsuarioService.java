@@ -52,7 +52,7 @@ public class UsuarioService {
 	public UsuarioVO getUsuarioByEmail(String email) {
 		UsuarioVO u = null;
 
-		u = dao.findByEmailAndClave(email);
+		u = dao.findByEmail(email);
 		
 		return u;
 	}

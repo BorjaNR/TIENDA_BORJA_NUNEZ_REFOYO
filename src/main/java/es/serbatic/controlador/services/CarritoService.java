@@ -60,18 +60,6 @@ public class CarritoService {
 	public void borrarCarrito(int id) {
 		cd.deleteById(id);
 	}
-	
-	public boolean comprobarStock(int productoId, int cantidad) {
-		boolean esValido = false;
-		ProductoVO p = new ProductoVO();
-		p = pd.findById(productoId).orElse(null);
-		
-		if(p.getStock()>= cantidad) {
-			esValido = true;
-		}
-		
-		return esValido;
-	}
 
 	public int totalNumeroDeCarritos(int id) {
 		int contadorCarrito = 0;

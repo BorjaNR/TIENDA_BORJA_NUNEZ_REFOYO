@@ -42,4 +42,16 @@ public class ProductoService {
 			dao.save(p);
 		}
 	}
+	
+	public boolean comprobarStock(int productoId, int cantidad) {
+		boolean esValido = false;
+		ProductoVO p = new ProductoVO();
+		p = dao.findById(productoId).orElse(null);
+		
+		if(p.getStock()>= cantidad) {
+			esValido = true;
+		}
+		
+		return esValido;
+	}
 }
