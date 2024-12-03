@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cambiar pass</title>
+<!-- Archivo CSS local, si existe en /static/css/login.css -->
+<link th:href="@{/css/login.css}" rel="stylesheet" />
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+<body>
+<nav th:replace="/fragments/header.html :: header"></nav>
+<div class="login-clean">
+		<form th:action="@{/verCambiarPass/cambiar}" method="POST">
+			<h2 class="sr-only">Cambiar Contraseña</h2>
+			<div class="illustration">
+				<i class="icon ion-ios-navigate"></i>
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="passActual" placeholder="Contraseña Actual" required>
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="passNueva"placeholder="Nueva Contraseña" required>
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="passNuevaRepe"placeholder="Repiste la nueva contraseña" required>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-block" type="submit">Confirmar</button>
+			</div>
+            <p style="color:red" th:if="${error}" th:text="${error}"></p>
+		</form>
+	</div>
+	<footer th:replace="/fragments/footer.html :: footer"></footer>
+	<!-- Archivos JS desde un CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</body>
+</html>
